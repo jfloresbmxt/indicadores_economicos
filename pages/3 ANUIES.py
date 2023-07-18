@@ -26,17 +26,17 @@ def get_anuies():
 
 anuies, test, lista_estados = get_anuies()
 
+st.header("Educación superior - ANUIES")
 estado = st.selectbox(
     "Selecciona el estado",
     lista_estados
 )
 
 tabla1, tabla2, tabla3 = get_tables(anuies, test, estado)
-# tabla1 = table_style(tabla1)
 tabla2 = table_style(tabla2)
-tabla3 = table_style(tabla3)
+tabla3_style = table_style(tabla3)
 
-st.write('**Producto Interno Bruto**')
+
 col1, col2 = st.columns(2)
 col1.markdown(metrics(tabla1.loc[0]["Egresados 2022"], "egresados en 2022"), unsafe_allow_html=True)
 col2.markdown(metrics(int(tabla1.loc[0]["Ranking Nacional"]), "lugar a nivel nacional"), unsafe_allow_html=True)
@@ -52,15 +52,26 @@ hide_table_row_index = """
 st.markdown(hide_table_row_index, unsafe_allow_html=True)
 
 with st.container():
-    st.write("**Cuadro 1. Valor del PIB por grandes grupos de actividad (pesos corrientes)**")
+    st.write("**Cuadro 1. Egresados por nivel de estudios**")
     # Table
     st.table(tabla2)
 
 st.divider()
 
+a = tabla3[(tabla3["campo amplio de formación"] == "Ciencias Naturales, Matemáticas Y Estadística") | 
+                (tabla3["campo amplio de formación"] == "Tecnologías De La Información Y La Comunicación") |
+                (tabla3["campo amplio de formación"] == "Ingeniería, Manufactura Y Construcción")]["Egresados 2022 (%)"].sum()
+
+b = round(100 - a)
+
+col1, col2 = st.columns(2)
+col1.markdown(metrics(str(round(a)) + "%", "Egresados que pertenecen a carreras técnicas y relacionadas a manufacturas"), unsafe_allow_html=True)
+col2.markdown(metrics(str(b) + "%", "Egresados que pertenecen a administrativas, ciencias sociales y servicios"), unsafe_allow_html=True)
+
+
 with st.container():
-    st.write("**Cuadro 1. Valor del PIB por grandes grupos de actividad (pesos corrientes)**")
+    st.write("**Cuadro 2. Egresados por campo amplio de formación**")
     # Table
-    st.table(tabla3)
+    st.table(tabla3_style)
 
 st.divider()
