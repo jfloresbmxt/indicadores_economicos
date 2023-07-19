@@ -50,7 +50,6 @@ hide_table_row_index = """
 # Inject CSS with Markdown
 st.markdown(hide_table_row_index, unsafe_allow_html=True)
 
-st.subheader("Indicador de competitividad")
 with st.container():
     # st.write("**Cuadro 1. Valor del PIB por grandes grupos de actividad (pesos corrientes)**")
     # Table
