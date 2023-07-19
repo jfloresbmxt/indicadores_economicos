@@ -10,7 +10,7 @@ st.set_page_config(
 
 @st.cache_data
 def get_data():
-    data = pd.read_excel("data/indicadores_empleo.xlsx")
+    data = pd.read_excel("data/indicadores_empleov2.xlsx")
 
     return data
 
