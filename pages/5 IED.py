@@ -25,12 +25,14 @@ estado = st.selectbox(
 
 fig, data = gen_bar(nacional, estado)
 
-inversion = format(round(data.iloc[0]["Total (Millones USD)"]), ",d")
+inversion = round(data.iloc[0]["Total (Millones USD)"])
 ranking = str(data.iloc[0]["Ranking"])
+total = str(round(((inversion/nacional["Total (Millones USD)"].sum())*100), 1))
 
-col1, col2 = st.columns(2)
+col1, col2, col3 = st.columns(3)
 col1.markdown(metrics(ranking + "°", "receptor del país"), unsafe_allow_html=True)
-col2.markdown(metrics(inversion, "Millones USD"), unsafe_allow_html=True)
+col2.markdown(metrics(format(inversion, ",d"), "Millones USD"), unsafe_allow_html=True)
+col3.markdown(metrics(total + "%", "del total nacional"), unsafe_allow_html=True)
 
 st.plotly_chart(fig, use_container_width=True)
 
