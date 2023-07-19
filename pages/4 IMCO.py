@@ -10,7 +10,7 @@ st.set_page_config(
 
 @st.cache_data
 def get_data():
-    excel_file = "data/imco/raw.xlsx"
+    excel_file = "data/imco/rawv2.xlsx"
     sheet_name = "NORM"
     data = pd.read_excel(excel_file, sheet_name)
     data["Entidad"] = data["Entidad"].apply(lambda x: "Coahuila de Zaragoza" if x == "Coahuila" else x)
@@ -23,7 +23,7 @@ def get_data():
 
 @st.cache_data
 def get_ranking():
-    excel_file = "data/imco/raw.xlsx"
+    excel_file = "data/imco/rawv2.xlsx"
     sheet_name = "R"
     data = pd.read_excel(excel_file, sheet_name)
     data["Entidad"] = data["Entidad"].apply(lambda x: "Coahuila de Zaragoza" if x == "Coahuila" else x)

@@ -25,7 +25,7 @@ def table_style(df):
 
     # table
     df = (df.style
-        .format(precision=0, thousands=",")
+        .format(precision=1, thousands=",")
         .set_properties(**{'text-align': 'left'})
         .set_caption("Fuente: Elaborado por Nafin - Bancomext con información del INEGI")
         .set_table_styles(styles)
