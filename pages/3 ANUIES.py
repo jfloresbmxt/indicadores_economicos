@@ -35,11 +35,13 @@ estado = st.selectbox(
 tabla1, tabla2, tabla3 = get_tables(anuies, test, estado)
 tabla2 = table_style(tabla2)
 tabla3_style = table_style(tabla3)
+porcentaje = round(((tabla1.loc[0]["Egresados 2022"])/892836)*100)
 
 
-col1, col2 = st.columns(2)
+col1, col2, col3 = st.columns(3)
 col1.markdown(metrics(tabla1.loc[0]["Egresados 2022"], "egresados en 2022"), unsafe_allow_html=True)
 col2.markdown(metrics(int(tabla1.loc[0]["Ranking Nacional"]), "lugar a nivel nacional"), unsafe_allow_html=True)
+col3.markdown(metrics(str(porcentaje) + "%", "del nacional"), unsafe_allow_html=True)
 
 hide_table_row_index = """
                 <style>
