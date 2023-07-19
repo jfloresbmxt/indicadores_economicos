@@ -56,9 +56,9 @@ def get_indicadores(df, estado):
     ter = (df.iloc[:,13]).iloc[0]
 
 
-    return [poblacion, poblacion_p, pea, peap, edadpea, edadpea_p, desocupacion, desocupacion_p, i, i_p, es, es_p]
+    return [poblacion, poblacion_p, pea, peap, edadpea, edadpea_p, desocupacion, desocupacion_p, i, i_p, es, es_p, prim, sec, ter]
 
-p, pp, pea, peap, edadpea, edadpea_p, desocupacion, desocupacion_p, i, i_p, es, es_p = get_indicadores(get_data(), estado)
+p, pp, pea, peap, edadpea, edadpea_p, desocupacion, desocupacion_p, i, i_p, es, es_p, prim, sec, ter = get_indicadores(get_data(), estado)
 
 # st.dataframe(indicadores)
 
@@ -98,13 +98,13 @@ st.divider()
 st.subheader("Fuerza Laboral por sector")
 col1, col2, col3 = st.columns(3)
 col1.markdown("**Sector primario**")
-col1.markdown(metrics(str(round(desocupacion, 1)) + "%", "Desocupacion"), unsafe_allow_html=True)
+col1.markdown(metrics(str(round(prim, 1)) + "%", "de la PEA del estado"), unsafe_allow_html=True)
 
 col2.markdown("**Sector secundario**")
-col2.markdown(metrics(str(round(i, 1)) + "%", "poblacion total"), unsafe_allow_html=True)
+col2.markdown(metrics(str(round(sec, 1)) + "%", "de la PEA del estado"), unsafe_allow_html=True)
 
 col3.markdown("**Sector terciario**")
-col3.markdown(metrics(str(round(es_p,1)) + "%", "desempleadas"), unsafe_allow_html=True)
+col3.markdown(metrics(str(round(ter,1)) + "%", "de la PEA del estado"), unsafe_allow_html=True)
 
 
 hide_table_row_index = """
