@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-from css.metrics import metrics
 from tables.enoe import table_style
 
 st.set_page_config(
