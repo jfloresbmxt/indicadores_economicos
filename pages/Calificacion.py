@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+import urllib
+import base64
 from tables.enoe import table_style
 
 @st.cache_data
@@ -14,11 +16,8 @@ data, lista_estados = get_data()
 st.header("Calificación crediticia")
 
 st.markdown('''NOTA 1: La calificación que se debe de tomar es la de **HR RATINGS**, en caso de no 
-             tener calificación, usar la de **FITCH MEXICO**''')
-
-st.markdown('''NOTA 2: Descripcion de la calificación **HR RATINGS** esta disponible en el siguiente link
-            https://www.hrratings.com/docs/pdf/Escalas%20de%20Calificaci%C3%B3n%20de%20HR%20Ratings.pdf
-            ''')
+             tener calificación, usar la de **FITCH MEXICO**.
+            Las escalas se encuentran al final de la pagina''')
 
 data = data[["Entidad","hr", "fitch"]]
 data.columns = ["Entidad", "HR RATINGS", "FITCH MEXICO"]
@@ -36,3 +35,12 @@ with st.container():
     # st.write("**Cuadro 1. Valor del PIB por grandes grupos de actividad (pesos corrientes)**")
     # Table
     st.table(table)
+
+    #function to display the PDF of a given file 
+def show_pdf(file_path):
+    with open(file_path,"rb") as f:
+        base64_pdf = base64.b64encode(f.read()).decode('utf-8')
+    pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="800" height="800" type="application/pdf"></iframe>'
+    st.markdown(pdf_display, unsafe_allow_html=True)
+
+show_pdf("data/escalas.pdf")
