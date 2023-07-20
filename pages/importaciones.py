@@ -4,14 +4,13 @@ from tables.enoe import table_style
 
 @st.cache_data
 def get_data():
-    data = pd.read_excel("data/importaciones_edos.xlsx")
+    data = pd.read_excel("data/importaciones_edos_1.xlsx")
 
     estados = pd.read_excel("data/estados.xlsx")
 
     return [data, estados]
 
 data, lista_estados = get_data()
-sectores = data["descripcion"].unique()
 
 st.header("Importaciones")
 
@@ -20,8 +19,8 @@ estado = st.selectbox(
     lista_estados
 )
 
-data = (data[data["Entidad"] == estado]).iloc[:, 1:]
-# data = (data[data["descripcion"] == sector])
+
+data = (data[data["Entidad"] == estado]).iloc[:,1:]
 
 data["partida"] = data["partida"].astype(str) 
 data.columns = ["Subsector", "Descripción subsector", "Partida", "Descripción Partida"]
