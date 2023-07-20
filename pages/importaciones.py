@@ -4,7 +4,7 @@ from tables.enoe import table_style
 
 @st.cache_data
 def get_data():
-    data = pd.read_excel("data/importaciones_edos_1.xlsx")
+    data = pd.read_excel("data/importaciones_edosv2.xlsx")
 
     estados = pd.read_excel("data/estados.xlsx")
 
@@ -20,10 +20,12 @@ estado = st.selectbox(
 )
 
 
-data = (data[data["Entidad"] == estado]).iloc[:,1:]
+data = (data[data["nombre_estado"] == estado]).sort_values("sort")
+
 
 data["partida"] = data["partida"].astype(str) 
-data.columns = ["Subsector", "Descripción subsector", "Partida", "Descripción Partida"]
+data.columns = ["No", "Entidad", "Subsector", "Desc subsector",
+                "Partida", "Descripción Partida"]
 table = table_style(data)
 
 hide_table_row_index = """
