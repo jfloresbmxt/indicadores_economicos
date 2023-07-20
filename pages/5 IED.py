@@ -8,7 +8,7 @@ st.header("Inversión Extranjera Directa")
 
 @st.cache_data
 def get_data():
-    nacional = pd.read_excel("data/ied/acum_nacional.xlsx")
+    nacional = pd.read_excel("data/ied/acum_nacionalv2.xlsx")
 
     lista_estados = pd.read_excel("data/estados.xlsx")
 
