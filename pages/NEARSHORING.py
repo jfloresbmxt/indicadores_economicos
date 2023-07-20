@@ -4,7 +4,7 @@ from tables.enoe import table_style
 
 @st.cache_data
 def get_data():
-    data = pd.read_excel("data/nearshoringv2.xlsx")
+    data = pd.read_excel("data/nearshoringv3.xlsx")
 
     estados = pd.read_excel("data/estados.xlsx")
 
